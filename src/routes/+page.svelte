@@ -1,9 +1,11 @@
 
 <script lang="ts">
 	import surreal from '$lib/utils/surreal';
+	import Datalist from "$lib/components/Datalist.svelte";
 
 	async function add() {
 		let response = await surreal.create('recipie', {name: 'test'});
+		console.log(response);
 	}
 	
 	async function fetch() {
@@ -16,4 +18,11 @@
 <div class="items-center">
 	<button type="button" class="variant-filled" on:click={add}>add</button>
 	<button type="button" class="variant-filled" on:click={fetch}>fetch</button>
+
+	<Datalist model="recipie">
+		<div slot="item" let:item={item}>
+			{item.name}
+		</div>	
+	</Datalist>
 </div>
+
