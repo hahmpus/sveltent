@@ -1,5 +1,5 @@
 
-<script lang="ts">
+<script>
 	import surreal from '$lib/utils/surreal';
 	import Datalist from "$lib/components/Datalist.svelte";
 
@@ -13,16 +13,17 @@
 		console.log(response);
 	}
 
+
 </script>
 
 <div class="items-center">
 	<button type="button" class="variant-filled" on:click={add}>add</button>
 	<button type="button" class="variant-filled" on:click={fetch}>fetch</button>
 
-	<Datalist model="recipie">
-		<div slot="item" let:item={item}>
+	<Datalist model="recipie" let:item={item}>
+	
 			{item.name}
-		</div>	
+	
 	</Datalist>
 </div>
 
