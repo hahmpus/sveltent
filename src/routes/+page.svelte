@@ -21,9 +21,14 @@
 	<button type="button" class="variant-filled" on:click={fetch}>fetch</button>
 
 	<Datalist model="recipie" let:item={item}>
-	
-			{item.name}
+	<div class="item-card">
+
+		{item.name}
+	</div>
 	
 	</Datalist>
 </div>
 
+<style>
+	
+</style>
