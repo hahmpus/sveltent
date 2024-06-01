@@ -14,28 +14,22 @@ datasource db {
 }
 
 // TEST DATA
-model Post {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  title     String   @db.VarChar(255)
-  content   String?
-  published Boolean  @default(false)
-  author    User     @relation(fields: [authorId], references: [id])
-  authorId  Int
+model Ingredient {
+  id                 String               @id @default(uuid())
+  name               String
+  RecipieIngredients RecipieIngredients[]
 }
 
-model Profile {
-  id     Int     @id @default(autoincrement())
-  bio    String?
-  user   User    @relation(fields: [userId], references: [id])
-  userId Int     @unique
+model RecipieIngredients {
+  id           String     @id @default(uuid())
+  recipie      Recipie    @relation(fields: [recipieId], references: [id])
+  recipieId    String
+  ingredient   Ingredient @relation(fields: [ingredientId], references: [id])
+  ingredientId String
 }
 
-model User {
-  id      Int      @id @default(autoincrement())
-  email   String   @unique
-  name    String?
-  posts   Post[]
-  profile Profile?
+model Recipie {
+  id          String               @id @default(uuid())
+  name        String
+  ingredients RecipieIngredients[]
 }
