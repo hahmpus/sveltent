@@ -8,8 +8,6 @@
         {#each items as item}
             <slot name="item" prop={item}></slot>
         {/each} 
-    {:else}
-        <p>...</p>
     {/if}
 </div>
 

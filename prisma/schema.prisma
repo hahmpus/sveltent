@@ -9,27 +9,33 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
 }
 
 // TEST DATA
 model Ingredient {
-  id                 String               @id @default(uuid())
+  id                 String              @id @default(auto()) @map("_id") @db.ObjectId
   name               String
   RecipieIngredients RecipieIngredients[]
 }
 
 model RecipieIngredients {
-  id           String     @id @default(uuid())
+  id           String    @id @default(auto()) @map("_id") @db.ObjectId
   recipie      Recipie    @relation(fields: [recipieId], references: [id])
-  recipieId    String
+  recipieId    String  @db.ObjectId
   ingredient   Ingredient @relation(fields: [ingredientId], references: [id])
-  ingredientId String
+  ingredientId String  @db.ObjectId
 }
 
 model Recipie {
-  id          String               @id @default(uuid())
+  id          String              @id @default(auto()) @map("_id") @db.ObjectId
   name        String
   ingredients RecipieIngredients[]
+}
+
+type Nutrient {
+  name String
+  unit String
+  amount Float
 }

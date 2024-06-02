@@ -6,13 +6,11 @@
     import { onDestroy } from 'svelte';
 
 	const filters:any = {};
-
 	
 	const [data, fetching, error, get] = api<Recipie[]>('GET', "/api/recipie", filters);
-	let recipies: Recipie[];
-
+	let recipieList: Recipie[];
 	const unsub = data.subscribe((val) => {
-		recipies = val;
+		recipieList = val;
 	}); 
 	
 	onDestroy(() => {
@@ -22,11 +20,7 @@
 </script>
 
 <div class="items-center">
-
-
-
-
-	<List items={recipies}>
+	<List items={recipieList}>
 		<div class="" slot="item" let:prop={recipie}>
 			{recipie.name}
 		</div>
