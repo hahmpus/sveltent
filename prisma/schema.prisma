@@ -17,15 +17,16 @@ datasource db {
 model Ingredient {
   id                 String              @id @default(auto()) @map("_id") @db.ObjectId
   name               String
+  nutrients          Nutrients[]
   RecipieIngredients RecipieIngredients[]
 }
 
 model RecipieIngredients {
-  id           String    @id @default(auto()) @map("_id") @db.ObjectId
+  id           String     @id @default(auto()) @map("_id") @db.ObjectId
   recipie      Recipie    @relation(fields: [recipieId], references: [id])
-  recipieId    String  @db.ObjectId
+  recipieId    String     @db.ObjectId
   ingredient   Ingredient @relation(fields: [ingredientId], references: [id])
-  ingredientId String  @db.ObjectId
+  ingredientId String     @db.ObjectId
 }
 
 model Recipie {
@@ -34,7 +35,7 @@ model Recipie {
   ingredients RecipieIngredients[]
 }
 
-type Nutrient {
+type Nutrients {
   name String
   unit String
   amount Float
