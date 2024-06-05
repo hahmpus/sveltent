@@ -1,10 +1,10 @@
 version: '3.8'
 volumes:
-  mongodb-data:
-    name: mongodb-data
+  mongo-data:
+    name: mongo-data
     driver: local
-  mongodb-config:
-    name: mongodb-config
+  mongo-config:
+    name: mongo-config
     driver: local
 services:
   mongo1:
@@ -25,8 +25,8 @@ services:
     networks:
       - net1
     volumes:
-      - "mongodb-data:/data/db"
-      - "mongodb-config:/data/configdb"
+      - "mongo-data:/data/db"
+      - "mongo-config:/data/configdb"
   mongo-express:
     image: mongo-express
     restart: always
