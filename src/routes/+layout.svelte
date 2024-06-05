@@ -3,37 +3,33 @@
 	import '../app.postcss';
 
 	// Floating UI for Popups
-	import { computePosition, autoUpdate, flip, shift, offset, arrow } from '@floating-ui/dom';
-	import { AppBar, AppShell, storePopup } from '@skeletonlabs/skeleton';
-	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
+	import { AppBar, AppRail, AppRailAnchor, AppRailTile } from '@skeletonlabs/skeleton';
+
 	
 	/** @type {import('./$types').LayoutData} */
 	export let data;
+
+    let currentTile = 0;
 </script>
 
 <div>
-	<AppShell>
-    
-        <AppBar slot="header">
-            <a href="/" class="btn variant-filled-primary">
-                Home
-            </a>
-            <a href="/recipie" class="btn variant-filled-primary">
-                Recipies
-            </a>
-        </AppBar>
 
-        <!-- (sidebarLeft) -->
-        <!-- (sidebarRight) -->
-        <!-- (pageHeader) -->
+    <div class="bg-surface-100-800-token">
+        <div class="mx-auto max-w-6xl">
+            <AppBar gridColumns="grid-cols-3" slotDefault="place-self-center" slotTrail="place-content-end">
+                <svelte:fragment slot="lead">(icon)</svelte:fragment>
+                (title)
+                <svelte:fragment slot="trail">(actions)</svelte:fragment>
+            </AppBar>
+        </div>
+    </div>
 
+    <div class="mx-auto max-w-6xl">
 		<PageTransition key={data.pathname}>
 			<div class="container h-full mx-auto justify-center">
                 <slot />
 			</div>
 		</PageTransition>
+    </div>
 
-
-        <!-- (footer) -->
-    </AppShell>
 </div>
