@@ -5,7 +5,7 @@
 </script>
 
 <form method="POST" action="?/addUser">
-	<button type="submit" class="variant-filled">add</button>
+	<button class="btn btn-primary" type="submit">add</button>
 </form>
 
 
