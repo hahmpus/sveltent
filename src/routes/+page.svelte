@@ -1,11 +1,15 @@
 
 <script lang="ts">
-
+    import Box from "$lib/components/layout/Box.svelte";
 
 </script>
 
+
 <form method="POST" action="?/addUser">
-	<button class="btn btn-primary" type="submit">add</button>
+
+	<Box>
+		asdhjjkashdjhkasd
+	</Box>
 </form>
 
 

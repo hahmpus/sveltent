@@ -4,6 +4,7 @@
 	import List from '$lib/components/List.svelte';
 	import type { Recipie } from '@prisma/client';
     import { onDestroy } from 'svelte';
+    import Box from '$lib/components/layout/Box.svelte';
 
 	const filters:any = {};
 	
@@ -20,6 +21,9 @@
 </script>
 
 <div class="items-center">
+	<Box>
+		asdsdaasd
+	</Box>
 	<List items={recipieList}>
 		<div class="" slot="item" let:prop={recipie}>
 			{recipie.name}

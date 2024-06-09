@@ -1,20 +1,30 @@
-<script>
+<script lang="ts">
+    import Navbar from '$lib/components/layout/Navbar.svelte';
     import PageTransition from '$lib/components/PageTransition.svelte';
 	import '../app.postcss';
-	
-	/** @type {import('./$types').LayoutData} */
-	export let data;
+    import Modals from '$lib/components/modals/Modals.svelte';
+    import { openModal, onBeforeClose } from '$lib/components/modals/store';
+    import type { LayoutData } from './$types';
+
+    import TestModal from '$lib/components/modals/views/TestModal.svelte';
+
+	export let data: LayoutData;
+
 
 </script>
 
 <div>
 
-    <div class="navbar bg-primary text-primary-content">
-        <span class="w-full max-w-screen-lg mx-auto">
+    <Navbar>
+        <div slot="start">
+            <a href="/" class="btn btn-ghost btn-sm rounded-btn">Home</a>
+            <a href="/recipie" class="btn btn-ghost btn-sm rounded-btn">Recipie</a>
+        </div>
+        <div>
+            <h1 class="text-2xl font-bold">Starve(nt)</h1>
+        </div>
+    </Navbar>
 
-            <button class="btn btn-ghost text-xl">daisyUI</button>
-        </span>
-    </div>
 
     <PageTransition key={data.pathname}>
         <div class="container h-full mx-auto justify-center">
@@ -22,11 +32,13 @@
         </div>
     </PageTransition>
 
+    <button on:click={() => openModal(TestModal)}>open</button>
+
+    <Modals />
 
 </div>
 
+
 <style>
-    .maw-1140 {
-        max-width: 1140px;
-    }
+
 </style>
