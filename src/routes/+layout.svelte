@@ -20,9 +20,6 @@
             <a href="/" class="btn btn-ghost btn-sm rounded-btn">Home</a>
             <a href="/recipie" class="btn btn-ghost btn-sm rounded-btn">Recipie</a>
         </div>
-        <div>
-            <h1 class="text-2xl font-bold">Starve(nt)</h1>
-        </div>
     </Navbar>
 
 

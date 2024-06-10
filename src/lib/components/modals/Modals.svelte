@@ -37,9 +37,23 @@ async function importComponent(component: any) {
                 {#await importComponent(modal.component)}
                     <slot name="loading" />
                 {:then component}
+                    <Modal isOpen={i === allmodals.length - 1 && !isTransitioning}>
+                        <svelte:component 
+                            this={component}
+                            {...modal.props}
+                            on:introstart={() => {
+                                exitBeforeEnter.set(true);
+                            }}
+                            on:outroend={() => {
+                                transitioning.set(false);
+                            }}
+                        />
+                    </Modal>
+                {/await}
+            {:else}
+                <Modal isOpen={i === allmodals.length - 1 && !isTransitioning}>
                     <svelte:component 
-                        this={component}
-                        isOpen={i === allmodals.length - 1 && !isTransitioning}
+                        this={modal.component}
                         {...modal.props}
                         on:introstart={() => {
                             exitBeforeEnter.set(true);
@@ -48,19 +62,7 @@ async function importComponent(component: any) {
                             transitioning.set(false);
                         }}
                     />
-                {/await}
-            {:else}
-                <svelte:component 
-                    this={modal.component}
-                    isOpen={i === allmodals.length - 1 && !isTransitioning}
-                    {...modal.props}
-                    on:introstart={() => {
-                        exitBeforeEnter.set(true);
-                    }}
-                    on:outroend={() => {
-                        transitioning.set(false);
-                    }}
-                />
+                </Modal>
             {/if}
         {/each}
     </slot>

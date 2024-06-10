@@ -2,17 +2,20 @@
   import { fly } from "svelte/transition";
   import { closeModal } from "./store";
 
+  export let isOpen: boolean = false;
 
 </script>
 
-<dialog open class="modal" transition:fly={{ y: 50 }} on:introstart on:outroend>
-  <div class="modal-box">
-    <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" on:click={closeModal}>✕</button>
-    <div class="mt-5">
-      <slot />
+{#if isOpen}
+  <dialog open class="modal" transition:fly={{ y: 50 }} on:introstart on:outroend>
+    <div class="modal-box">
+      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" on:click={closeModal}>✕</button>
+      <div class="mt-5">
+        <slot />
+      </div>
     </div>
-  </div>
-</dialog>
+  </dialog>
+{/if}
 
 <style>
   .modal {
