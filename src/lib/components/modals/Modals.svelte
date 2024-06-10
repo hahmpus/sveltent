@@ -37,31 +37,29 @@ async function importComponent(component: any) {
                 {#await importComponent(modal.component)}
                     <slot name="loading" />
                 {:then component}
-                    <Modal isOpen={i === allmodals.length - 1 && !isTransitioning}>
-                        <svelte:component 
-                            this={component}
-                            {...modal.props}
-                            on:introstart={() => {
-                                exitBeforeEnter.set(true);
-                            }}
-                            on:outroend={() => {
-                                transitioning.set(false);
-                            }}
-                        />
-                    </Modal>
-                {/await}
-            {:else}
-                <Modal isOpen={i === allmodals.length - 1 && !isTransitioning}>
-                    <svelte:component 
-                        this={modal.component}
-                        {...modal.props}
+                    <Modal 
+                        isOpen={i === allmodals.length - 1 && !isTransitioning}
                         on:introstart={() => {
                             exitBeforeEnter.set(true);
                         }}
                         on:outroend={() => {
                             transitioning.set(false);
-                        }}
-                    />
+                        }}    
+                    >
+                        <svelte:component this={component} {...modal.props} />
+                    </Modal>
+                {/await}
+            {:else}
+                <Modal 
+                    isOpen={i === allmodals.length - 1 && !isTransitioning}
+                    on:introstart={() => {
+                        exitBeforeEnter.set(true);
+                    }}
+                    on:outroend={() => {
+                        transitioning.set(false);
+                    }}    
+                >
+                    <svelte:component this={modal.component} {...modal.props} />
                 </Modal>
             {/if}
         {/each}

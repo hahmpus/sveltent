@@ -7,7 +7,7 @@
 </script>
 
 {#if isOpen}
-  <dialog open class="modal" transition:fly={{ y: 50 }} on:introstart on:outroend>
+  <dialog open class="modal" transition:fly|global={{ y: 25, duration: 200 }} on:introstart on:outroend>
     <div class="modal-box">
       <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" on:click={closeModal}>✕</button>
       <div class="mt-5">
