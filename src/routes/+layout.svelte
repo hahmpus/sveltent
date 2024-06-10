@@ -7,6 +7,7 @@
     import type { LayoutData } from './$types';
 
     import TestModal from '$lib/components/modals/views/TestModal.svelte';
+    import Breadcrumbs from '$lib/components/Breadcrumbs.svelte';
 
 	export let data: LayoutData;
 
@@ -23,13 +24,14 @@
     </Navbar>
 
 
-    <PageTransition key={data.pathname}>
-        <div class="container h-full mx-auto justify-center">
+    <div class="container h-full mx-auto justify-center ">
+        <Breadcrumbs />
+        <PageTransition key={data.pathname}>
+            <button on:click={() => openModal(TestModal)}>open</button>
             <slot />
-        </div>
-    </PageTransition>
+        </PageTransition>
+    </div>
 
-    <button on:click={() => openModal(TestModal)}>open</button>
 
     <Modals />
 

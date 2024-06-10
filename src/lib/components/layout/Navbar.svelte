@@ -4,8 +4,8 @@
 </script>
 
 <div class="navbar bg-neutral text-neutral-content">
-    <span class="w-full max-w-screen-lg mx-auto">
-        <div class="navbar-start">
+    <span class="container w-full mx-auto">
+        <div class="navbar-start text-left">
             
             <slot name="start"></slot>
         </div>
