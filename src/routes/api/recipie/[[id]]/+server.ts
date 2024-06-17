@@ -1,27 +1,15 @@
-import prisma from '$lib/database/client';
+import { RecipieModel } from '$lib/database/schemas/recipie';
 import type { RequestHandler } from '@sveltejs/kit';
 
 
 export const GET: RequestHandler = async ({ params }) => {
     if(params.id) {
-        
-        const recipie = await prisma.recipie.findUnique({
-            where: {
-                id: String(params.id)
-            },
-            include: {
-              ingredients: {
-                select: {
-                  ingredient: true
-                }
-              },
-            }
-        });
+        const recipie = await RecipieModel.findById(params.id).populate('ingredients');
         return new Response(JSON.stringify(recipie));
         
     } else {
 
-        const all = await prisma.recipie.findMany();
+        const all = await RecipieModel.find({}).populate('ingredients');
         return new Response(JSON.stringify(all));
 
     }
@@ -29,18 +17,11 @@ export const GET: RequestHandler = async ({ params }) => {
 
 export const POST: RequestHandler = async ({ request }) => {
     const requestData = await request.json();
-    await prisma.recipie.create({
-        data: {
-          name: requestData.name,  // Ensure your `Recipie` model has a `name` field
-          ingredients: {
-            create: requestData.ingredients.map((ingredientId: string) => ({
-              ingredient: {
-                connect: { id: ingredientId }
-              }
-            }))
-          }
-        }
-      });
+    const newRecipie = new RecipieModel({
+        name: requestData.name,
+        ingredients: requestData.ingredients
+    });
+    await newRecipie.save();
     return new Response('Recipie created successfully!');
 }
 
@@ -52,19 +33,7 @@ export const DELETE: RequestHandler = async ({ params }) => {
     return new Response('Must provide id', { status: 400 });
   }
 
-  //delete relationship first
-  await prisma.recipieIngredients.deleteMany({
-    where: {
-      recipieId: String(id)
-    }
-  });
-
-  //then delete the recipie
-  await prisma.recipie.delete({
-    where: {
-      id: String(id),
-    }
-  });
+  await RecipieModel.findByIdAndDelete(id);
 
   return new Response('Recipie deleted successfully!');
 };

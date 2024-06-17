@@ -2,7 +2,7 @@
 	import { writable } from 'svelte/store';
 	import api from "$lib/utils/request";
 	import List from '$lib/components/List.svelte';
-	import type { Recipie } from '@prisma/client';
+	import type { Recipie } from '$lib/database/schemas/recipie';
     import { onDestroy } from 'svelte';
     import Box from '$lib/components/layout/Box.svelte';
 
